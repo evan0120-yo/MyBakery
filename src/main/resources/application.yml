@@ -1,0 +1,40 @@
+ ################################ 
+#jwt:
+#  secret: dudurududadada
+ ################################ 
+#logging:
+#  file:
+#    name: MyBakery.log
+#  level:
+#    root: info
+ ################################    
+server:
+  servlet:
+    context-path: /api
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+ ################################
+spring:
+#  banner:
+#    charset: UTF-8
+  datasource:
+     driver-class-name: org.postgresql.Driver
+     url: jdbc:postgresql://localhost:5432/myBakery
+     username: postgres
+     password: sky77619
+#  servlet:
+#   multipart:
+#    max-file-size: 1MB
+#    max-request-size: 3MB
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: false
+    hibernate: 
+      ddl-auto: create-drop
+#  jackson:
+#   date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+#   time-zone: GMT+8   

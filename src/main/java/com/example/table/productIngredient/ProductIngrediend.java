@@ -1,4 +1,4 @@
-package com.example.table.product;
+package com.example.table.productIngredient;
 
 import java.time.LocalDateTime;
 
@@ -22,18 +22,21 @@ import lombok.ToString;
 @Getter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
-public class Product {
+public class ProductIngrediend {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PRODUCTION_INGREDIEND_ID")
+    private Long productIngrediendId;
+	
     @Column(name = "PRODUCTION_ID")
     private Long productId;
 	
-    @Column(name = "PRODUCTION_NAME")
-    private String productName;
+    @Column(name = "PRODUCTION_INGREDIEND_NAME")
+    private Long productIngrediendName;
     
-    @Column(name = "PRODUCTION_DESC_ID")
-    private String ProductDescId;
+    @Column(name = "INGREDIEND_TYPE")
+    private String IngrediendType;
     
     @CreatedDate
     @Column(name = "DT_CREATE", updatable = false, nullable = false)

@@ -21,7 +21,6 @@ public class ProductController {
 		productService.save(product);
 		return ResponseEntity.status(200).body("test success");
 	}
-	
 //	@PostMapping
 //	public ResponseEntity<?> countProduct(String[] products){
 ////		此 function 會收到一個字串的陣列，每個字串代表依序販售出去的商品，一個字串代表一個數量。

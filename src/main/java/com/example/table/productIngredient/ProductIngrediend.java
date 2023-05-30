@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,18 +26,19 @@ import lombok.ToString;
 public class ProductIngrediend {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCTION_INGREDIEND_ID")
-    private Long productIngrediendId;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "PRODUCT_INGREDIEND_ID")
+    private String productIngrediendId;
 	
-    @Column(name = "PRODUCTION_ID")
-    private Long productId;
+    @Column(name = "PRODUCT_ID")
+    private String productId;
 	
-    @Column(name = "PRODUCTION_INGREDIEND_NAME")
-    private Long productIngrediendName;
+    @Column(name = "PRODUCT_INGREDIEND_NAME")
+    private String productIngrediendName;
     
     @Column(name = "INGREDIEND_TYPE")
-    private String IngrediendType;
+    private String ingrediendType;
     
     @CreatedDate
     @Column(name = "DT_CREATE", updatable = false, nullable = false)
@@ -45,4 +47,7 @@ public class ProductIngrediend {
     @LastModifiedDate
     @Column(name = "DT_UPDATE", insertable  = false)
     private LocalDateTime dtUpdate;	
+    
+    @Column(name = "SORT")
+    private Integer sort;
 }

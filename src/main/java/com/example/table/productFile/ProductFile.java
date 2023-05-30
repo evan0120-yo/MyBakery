@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -27,12 +29,13 @@ import lombok.ToString;
 public class ProductFile {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCTION_FILE_ID")
-    private Long productFileId;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "PRODUCT_FILE_ID")
+    private String productFileId;
 	
-    @Column(name = "PRODUCTION_ID")
-    private Long productId;
+    @Column(name = "PRODUCT_ID")
+    private String productId;
 	
     @Column(name = "FILE")
     @Basic(fetch = FetchType.LAZY)

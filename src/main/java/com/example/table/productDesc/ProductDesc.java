@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,11 +26,12 @@ import lombok.ToString;
 public class ProductDesc {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCTION_DESC_ID")
-    private Long ProductDescId;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "PRODUCT_DESC_ID")
+    private String ProductDescId;
 	
-    @Column(name = "PRODUCTION_DESC")
+    @Column(name = "PRODUCT_DESC")
     private String ProductDesc;
     
     @CreatedDate

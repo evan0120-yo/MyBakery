@@ -12,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -36,6 +39,11 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraphs({
+	@NamedEntityGraph(name = "Product.FindAll", attributeNodes = {
+			@NamedAttributeNode(value = "productDesc")
+	})
+})
 public class Product implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

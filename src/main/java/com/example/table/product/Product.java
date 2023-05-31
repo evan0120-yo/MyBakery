@@ -1,20 +1,30 @@
 package com.example.table.product;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.example.table.productDesc.ProductDesc;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,18 +33,23 @@ import lombok.ToString;
 @Getter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
-public class Product {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Product implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "PRODUCTION_ID")
+    @Column(name = "PRODUCT_ID")
     private String productId;
 	
-    @Column(name = "PRODUCTION_NAME")
+    @Column(name = "PRODUCT_NAME")
     private String productName;
     
-    @Column(name = "PRODUCTION_DESC_ID")
+    @Column(name = "PRODUCT_DESC_ID")
     private String ProductDescId;
     
     @CreatedDate
@@ -44,4 +59,8 @@ public class Product {
     @LastModifiedDate
     @Column(name = "DT_UPDATE", insertable  = false)
     private LocalDateTime dtUpdate;	
+    
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@JoinColumn(name="PRODUCT_DESC_ID", referencedColumnName = "PRODUCT_DESC_ID", insertable = false, updatable = false)
+	private Set<ProductDesc> productDesc;
 }
